@@ -1,6 +1,6 @@
 # nifi-jira-bundle
 
-Utils is a NiFi Custom Processor and Controller Service which can be Used to cerate Jira Tickets.
+NiFi Custom Processor and Controller Service which can be Used to create Jira Tickets from NiFi.
 
 Credentials(User,Password,Project Name, URL) needs to be fed to Processor from controller service, which gives the flexibly that multiple processors can use the same credentials which gives one place change for all processors.
 
@@ -26,6 +26,11 @@ Sample flow
 Jira Ticket
 -----------
 ![Jira Ticket](images/ticket.png)
+
+Sample code
+-----------
+
+Abo[Demo](examples/SampleJiraTicketCreation.xml)
 
 Where can I get the latest release?
 -----------------------------------

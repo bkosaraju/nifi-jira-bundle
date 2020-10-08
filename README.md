@@ -39,7 +39,7 @@ You can download source from [SCM](https://github.com/bkosaraju/nifi-jira-bundle
 
 ```bash
 ./mvnw clean install
-#Artifacts can be found in target directory 
+#Artifacts can be found at nifi-jira-nar/target/nifi-jira-nar-<version>.nar  
 ```
 
 ## Contributing

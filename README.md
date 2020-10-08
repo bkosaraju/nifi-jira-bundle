@@ -29,8 +29,7 @@ Jira Ticket
 
 Sample code
 -----------
-
-Abo[Demo](examples/SampleJiraTicketCreation.xml)
+[Demo Code](examples/SampleJiraTicketCreation.xml)
 
 Where can I get the latest release?
 -----------------------------------

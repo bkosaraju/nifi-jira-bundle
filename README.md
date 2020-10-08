@@ -6,7 +6,7 @@ Credentials(User,Password,Project Name, URL) needs to be fed to Processor from c
 
 Controller Service
 ------------------
-![Example Controller Service](img/controllerservice.PNG)
+![Example Controller Service](images/controllerservice.png)
 
 
 Processor
@@ -17,11 +17,15 @@ any of the additional attributes to the processor will be printed as markdown ta
 
 if a attribute named as labels (comma separated list be set as labels to the app)
 
-![Example Processor](img/processor.PNG)
+![Example Processor](images/processor.png)
 
 Sample flow
 ----------
-![Sample flow](img/sampleflow.PNG)
+![Sample flow](images/sampleflow.png)
+
+Jira Ticket
+-----------
+![Jira Ticket](images/ticket.png)
 
 Where can I get the latest release?
 -----------------------------------

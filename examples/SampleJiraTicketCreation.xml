@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>07ec807d-0175-1000-81cd-b78ef17ff474</groupId>
+    <name>SampleJiraTicketCreation</name>
+    <snippet>
+        <connections>
+            <id>0d9ecb80-ff4b-3cdb-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <bends>
+                <x>992.0</x>
+                <y>208.0</y>
+            </bends>
+            <destination>
+                <groupId>f10dfc24-b0b9-3e02-0000-000000000000</groupId>
+                <id>6154276b-3e13-3043-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>0</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>Failure</selectedRelationships>
+            <source>
+                <groupId>f10dfc24-b0b9-3e02-0000-000000000000</groupId>
+                <id>5aeaf0b2-affd-39ee-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
+            <id>5e169b87-4143-3337-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>f10dfc24-b0b9-3e02-0000-000000000000</groupId>
+                <id>5aeaf0b2-affd-39ee-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>success</selectedRelationships>
+            <source>
+                <groupId>f10dfc24-b0b9-3e02-0000-000000000000</groupId>
+                <id>eaf894e1-4335-3886-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
+            <id>6f2d9b3b-bd61-3821-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <bends>
+                <x>592.0</x>
+                <y>208.0</y>
+            </bends>
+            <destination>
+                <groupId>f10dfc24-b0b9-3e02-0000-000000000000</groupId>
+                <id>6154276b-3e13-3043-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>0</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>Success</selectedRelationships>
+            <source>
+                <groupId>f10dfc24-b0b9-3e02-0000-000000000000</groupId>
+                <id>5aeaf0b2-affd-39ee-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <controllerServices>
+            <id>81e61176-e41d-395b-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-jira-nar</artifact>
+                <group>io.github.bkosaraju</group>
+                <version>1.0</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>jiraURL</key>
+                    <value>
+                        <name>jiraURL</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>jiraUser</key>
+                    <value>
+                        <name>jiraUser</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>jiraPassword</key>
+                    <value>
+                        <name>jiraPassword</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>jiraProject</key>
+                    <value>
+                        <name>jiraProject</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>JiraCredentialService</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>jiraURL</key>
+                    <value>https://bkosaraju.atlassian.net</value>
+                </entry>
+                <entry>
+                    <key>jiraUser</key>
+                    <value>bhargav.kosaraju@hotmail.com</value>
+                </entry>
+                <entry>
+                    <key>jiraPassword</key>
+                </entry>
+                <entry>
+                    <key>jiraProject</key>
+                    <value>IT Project</value>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>io.github.bkosaraju.service.jiranotification.JiraCredentialService</type>
+        </controllerServices>
+        <processors>
+            <id>5aeaf0b2-affd-39ee-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <position>
+                <x>600.0</x>
+                <y>0.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-jira-nar</artifact>
+                <group>io.github.bkosaraju</group>
+                <version>1.0</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Jira Credentials Service</key>
+                        <value>
+                            <identifiesControllerService>io.github.bkosaraju.service.jiranotification.JiraCredentialServiceApi</identifiesControllerService>
+                            <name>Jira Credentials Service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Summary</key>
+                        <value>
+                            <name>Summary</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Description</key>
+                        <value>
+                            <name>Description</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>priorityRating</key>
+                        <value>
+                            <name>priorityRating</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>issueType</key>
+                        <value>
+                            <name>issueType</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Additional Configuration-2</key>
+                        <value>
+                            <name>Additional Configuration-2</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Additnal Configuration-1</key>
+                        <value>
+                            <name>Additnal Configuration-1</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Custom Attribute</key>
+                        <value>
+                            <name>Custom Attribute</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>labels</key>
+                        <value>
+                            <name>labels</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Jira Credentials Service</key>
+                        <value>81e61176-e41d-395b-0000-000000000000</value>
+                    </entry>
+                    <entry>
+                        <key>Summary</key>
+                        <value>Ticket Create for X Event at: ${now()}</value>
+                    </entry>
+                    <entry>
+                        <key>Description</key>
+                        <value>${descriptionFromFlowFileAttribute}</value>
+                    </entry>
+                    <entry>
+                        <key>priorityRating</key>
+                        <value>High</value>
+                    </entry>
+                    <entry>
+                        <key>issueType</key>
+                        <value>Task</value>
+                    </entry>
+                    <entry>
+                        <key>Additional Configuration-2</key>
+                        <value>Some Other value to be loaded into Table</value>
+                    </entry>
+                    <entry>
+                        <key>Additnal Configuration-1</key>
+                        <value>Some value to be loaded into Table</value>
+                    </entry>
+                    <entry>
+                        <key>Custom Attribute</key>
+                        <value>123456789</value>
+                    </entry>
+                    <entry>
+                        <key>labels</key>
+                        <value>projectX, teamY, resourceZ</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>CreateJiraTicket</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>Failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>Success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>io.github.bkosaraju.processor.jiranotification.CreateJiraTicket</type>
+        </processors>
+        <processors>
+            <id>6154276b-3e13-3043-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <position>
+                <x>608.0</x>
+                <y>312.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-update-attribute-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.12.1</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Delete Attributes Expression</key>
+                        <value>
+                            <name>Delete Attributes Expression</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Store State</key>
+                        <value>
+                            <name>Store State</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Stateful Variables Initial Value</key>
+                        <value>
+                            <name>Stateful Variables Initial Value</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>canonical-value-lookup-cache-size</key>
+                        <value>
+                            <name>canonical-value-lookup-cache-size</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Delete Attributes Expression</key>
+                    </entry>
+                    <entry>
+                        <key>Store State</key>
+                        <value>Do not store state</value>
+                    </entry>
+                    <entry>
+                        <key>Stateful Variables Initial Value</key>
+                    </entry>
+                    <entry>
+                        <key>canonical-value-lookup-cache-size</key>
+                        <value>100</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>UpdateAttribute</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.attributes.UpdateAttribute</type>
+        </processors>
+        <processors>
+            <id>eaf894e1-4335-3886-0000-000000000000</id>
+            <parentGroupId>f10dfc24-b0b9-3e02-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>8.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.12.1</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>File Size</key>
+                        <value>
+                            <name>File Size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Batch Size</key>
+                        <value>
+                            <name>Batch Size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Data Format</key>
+                        <value>
+                            <name>Data Format</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Unique FlowFiles</key>
+                        <value>
+                            <name>Unique FlowFiles</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>generate-ff-custom-text</key>
+                        <value>
+                            <name>generate-ff-custom-text</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>character-set</key>
+                        <value>
+                            <name>character-set</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>mime-type</key>
+                        <value>
+                            <name>mime-type</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>descriptionFromFlowFileAttribute</key>
+                        <value>
+                            <name>descriptionFromFlowFileAttribute</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>File Size</key>
+                        <value>0B</value>
+                    </entry>
+                    <entry>
+                        <key>Batch Size</key>
+                        <value>1</value>
+                    </entry>
+                    <entry>
+                        <key>Data Format</key>
+                        <value>Text</value>
+                    </entry>
+                    <entry>
+                        <key>Unique FlowFiles</key>
+                        <value>false</value>
+                    </entry>
+                    <entry>
+                        <key>generate-ff-custom-text</key>
+                    </entry>
+                    <entry>
+                        <key>character-set</key>
+                        <value>UTF-8</value>
+                    </entry>
+                    <entry>
+                        <key>mime-type</key>
+                    </entry>
+                    <entry>
+                        <key>descriptionFromFlowFileAttribute</key>
+                        <value>Description Passed from Attributes.</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>1000 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>GenerateFlowFile</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.GenerateFlowFile</type>
+        </processors>
+    </snippet>
+    <timestamp>10/08/2020 23:24:18 AEDT</timestamp>
+</template>

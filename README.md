@@ -6,7 +6,7 @@ Credentials(User,Password,Project Name, URL) needs to be fed to Processor from c
 
 Controller Service
 ------------------
-![Example Controller Service](images/controllerservice.png)
+![Controller Service](images/control.png)
 
 
 Processor

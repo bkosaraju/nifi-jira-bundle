@@ -44,11 +44,11 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.*;
 
-@Tags({"notification","jira","jiranotification","custom"})
+@Tags({"notification", "jira", "jiranotification", "custom"})
 @CapabilityDescription("Processor to post the errors to notification service")
 @SeeAlso({})
-@ReadsAttributes({@ReadsAttribute(attribute="", description="")})
-@WritesAttributes({@WritesAttribute(attribute="", description="")})
+@ReadsAttributes({@ReadsAttribute(attribute = "", description = "")})
+@WritesAttributes({@WritesAttribute(attribute = "", description = "")})
 public class CreateJiraTicket extends AbstractProcessor {
 
     public static final PropertyDescriptor PROP_JIRA_CREDENTIAL_SERVICE = new PropertyDescriptor.Builder()
@@ -85,26 +85,26 @@ public class CreateJiraTicket extends AbstractProcessor {
             "Highest");
 
 
-    public static final AllowableValue IT1 = new AllowableValue("Task", "Task","Task Applies to All types of projects");
+    public static final AllowableValue IT1 = new AllowableValue("Task", "Task", "Task Applies to All types of projects");
     public static final AllowableValue IT2 = new AllowableValue("Epic", "Epic", "Epic to Software Project types");
     public static final AllowableValue IT3 = new AllowableValue("Bug", "Bug", "Bug applies to Software Project types");
     public static final AllowableValue IT4 = new AllowableValue("Story", "Story", "Story applies to Software Project types");
     public static final AllowableValue IT5 = new AllowableValue("Subtask", "Subtask", "Subtask applies to Software and Business Project types");
-    public static final AllowableValue IT6 = new AllowableValue("Change", "Change","Change Applies to Service Desk Projects");
-    public static final AllowableValue IT7 = new AllowableValue("IT help", "IT help","IT help Applies to Service Desk Projects");
-    public static final AllowableValue IT8 = new AllowableValue("Incident", "Incident","Incident Applies to Service Desk Projects");
-    public static final AllowableValue IT9 = new AllowableValue("New feature", "New feature","New feature Applies to Service Desk Projects");
-    public static final AllowableValue IT10 = new AllowableValue("Problem", "Problem","Problem Applies to Service Desk Projects");
-    public static final AllowableValue IT11 = new AllowableValue("Service request", "Service request","Service request Applies to Service Desk Projects");
-    public static final AllowableValue IT12 = new AllowableValue("Service request with approval", "Service request with approval","Service request with approval Applies to Service Desk Projects");
-    public static final AllowableValue IT13 = new AllowableValue("Support", "Support","Support Applies to Service Desk Projects");
+    public static final AllowableValue IT6 = new AllowableValue("Change", "Change", "Change Applies to Service Desk Projects");
+    public static final AllowableValue IT7 = new AllowableValue("IT help", "IT help", "IT help Applies to Service Desk Projects");
+    public static final AllowableValue IT8 = new AllowableValue("Incident", "Incident", "Incident Applies to Service Desk Projects");
+    public static final AllowableValue IT9 = new AllowableValue("New feature", "New feature", "New feature Applies to Service Desk Projects");
+    public static final AllowableValue IT10 = new AllowableValue("Problem", "Problem", "Problem Applies to Service Desk Projects");
+    public static final AllowableValue IT11 = new AllowableValue("Service request", "Service request", "Service request Applies to Service Desk Projects");
+    public static final AllowableValue IT12 = new AllowableValue("Service request with approval", "Service request with approval", "Service request with approval Applies to Service Desk Projects");
+    public static final AllowableValue IT13 = new AllowableValue("Support", "Support", "Support Applies to Service Desk Projects");
 
 
     public static final PropertyDescriptor PROP_PRIORITY_RATING = new PropertyDescriptor
             .Builder().name("priorityRating")
             .displayName("Priority")
             .description("Incident/Ticket Priority in Jira")
-            .allowableValues(PRIORITYRATING1, PRIORITYRATING2, PRIORITYRATING3,PRIORITYRATING4)
+            .allowableValues(PRIORITYRATING1, PRIORITYRATING2, PRIORITYRATING3, PRIORITYRATING4)
             .required(false)
             .defaultValue(PRIORITYRATING4.getValue())
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
@@ -114,7 +114,7 @@ public class CreateJiraTicket extends AbstractProcessor {
             .Builder().name("issueType")
             .displayName("Issue Type")
             .description("Jira Incident Type")
-            .allowableValues(IT1,IT2,IT3, IT4, IT5, IT6, IT7, IT8, IT9, IT10, IT11, IT12,IT13)
+            .allowableValues(IT1, IT2, IT3, IT4, IT5, IT6, IT7, IT8, IT9, IT10, IT11, IT12, IT13)
             .required(true)
             .defaultValue(IT1.getValue())
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
@@ -188,72 +188,77 @@ public class CreateJiraTicket extends AbstractProcessor {
             flowFile = session.create();
         }
 
-        //Map<String,String> attr = flowFile.getAttributes();
         JiraService jiraTicket = new JiraService();
-
-                Properties ps, jiraprops;
-                ps = jiraprops = new Properties();
-
-                FlowFile updatedFlowFile = flowFile;
-                //Load properties form controller service.
-                try {
-                    final JiraCredentialServiceApi cs = context.getProperty(PROP_JIRA_CREDENTIAL_SERVICE).asControllerService(JiraCredentialServiceApi.class);
-                    jiraprops = cs.getConnectionProperties();
-
-                }catch (Exception e) {
-                    logger.error("Unable to retrive the Jira properties form Controller service", e);
-                    updatedFlowFile = session.putAttribute(updatedFlowFile,"NotifacionError",e.getLocalizedMessage());
-                    session.transfer(updatedFlowFile,REL_FAIL);
-                }
+        Properties ps, jiraprops;
+        ps = jiraprops = new Properties();
+        FlowFile updatedFlowFile = flowFile;
+        try {
+            final JiraCredentialServiceApi cs = context.getProperty(PROP_JIRA_CREDENTIAL_SERVICE).asControllerService(JiraCredentialServiceApi.class);
+            jiraprops = cs.getConnectionProperties();
+        } catch (Exception e) {
+            logger.error("Unable to retrive the Jira properties form Controller service", e);
+            updatedFlowFile = session.putAttribute(updatedFlowFile, "NotifacionError", e.getLocalizedMessage());
+            session.transfer(updatedFlowFile, REL_FAIL);
+        }
 
         jiraTicket.setJiraUrl(jiraprops.getProperty("jiraURL"));
         jiraTicket.setJiraUser(jiraprops.getProperty("jiraUser"));
         jiraTicket.setJiraPassword(jiraprops.getProperty("jiraPassword"));
         jiraTicket.setPriorityName(context.getProperty(PROP_PRIORITY_RATING).evaluateAttributeExpressions(flowFile).getValue());
         jiraTicket.setIssueTypeName(context.getProperty(PROP_ISSUE_TYPE).evaluateAttributeExpressions(flowFile).getValue());
-        jiraTicket.setProjectKey(jiraprops.getProperty("jiraProject"));
+        jiraTicket.setSummary(context.getProperty(PROP_SUMMARY).evaluateAttributeExpressions(flowFile).getValue());
+        jiraTicket.setProjectName(jiraprops.getProperty("jiraProject"));
 
-        if (jiraprops.containsKey("labels")){
-            jiraTicket.setTags(Arrays.asList(jiraprops.getProperty("labels").split(",").clone()));
+
+        boolean additionalPropertiesFlag = false;
+        for (Map.Entry<PropertyDescriptor, String> custProp : context.getProperties().entrySet()) {
+            if (custProp.getKey().isDynamic()) {
+                additionalPropertiesFlag = true;
+                ps.setProperty(custProp.getKey().getName(), context.getProperty(custProp.getKey()).evaluateAttributeExpressions(flowFile).getValue());
+            }
         }
-            boolean additionalPropertiesFlag = false;
-            for (Map.Entry<PropertyDescriptor, String> custProp : context.getProperties().entrySet()) {
-                if (custProp.getKey().isDynamic()) {
-                    additionalPropertiesFlag = true;
-                    ps.setProperty(custProp.getKey().getName(), context.getProperty(custProp.getKey()).evaluateAttributeExpressions(flowFile).getValue());
-                }
-            }
-            StringWriter writer = new StringWriter();
-            try {
-                ps.store(new PrintWriter(writer),"");
-            } catch (IOException e) {
-                getLogger().error("Unable to read additonal atrributes from processor");
-                e.printStackTrace();
-            }
-            String strProps = writer.getBuffer().toString();
-            String mdTable = strProps.substring(strProps.indexOf('\n') + 1)
-                    .replaceAll("^#(.+)", "Event Time=$1")
-                    .replaceAll("\\\\", "")
-                    .replaceAll("(?m)^|=|$", "|");
+        if (ps.containsKey("labels")) {
+            jiraTicket.setTags(Arrays.asList(ps.getProperty("labels").split(",")));
+        }
+        StringWriter writer = new StringWriter();
+        try {
+            ps.store(new PrintWriter(writer), "");
+        } catch (IOException e) {
+            getLogger().error("Unable to read additonal atrributes from processor");
+            e.printStackTrace();
+        }
+        String strProps = writer.getBuffer().toString();
+        String mdTable = strProps.substring(strProps.indexOf('\n') + 1)
+                .replaceAll("^#(.+)", "Event Time=$1")
+                .replaceAll("\\\\", "")
+                .replaceAll("(?m)^|=|$", "|");
 
-        jiraTicket.setDescription(context.getProperty(PROP_DESCRIPTION).evaluateAttributeExpressions(flowFile).getValue() + ((additionalPropertiesFlag) ?  "\n\nh1. Additional Attributes \nh1.\n" + mdTable : ""));
+        jiraTicket.setDescription(context.getProperty(PROP_DESCRIPTION).evaluateAttributeExpressions(flowFile).getValue() + ((additionalPropertiesFlag) ? "\n\nh1. Additional Attributes \nh1.\n" + mdTable : ""));
 
-                try {
-                    String ticketId = jiraTicket.createJiraTicket();
-                    getLogger().info("Successfully create jira ticket: "+ticketId);
-                } catch (Exception e) {
-                    getLogger().error("Unable to Create Ticket with given configurations");
-                    e.printStackTrace();
-                    throw e;
-                }
-                 @SuppressWarnings({ "unchecked", "rawtypes" })
-                 Map<String,String> psMap = (Map) ps;
+        try {
+            String ticketId = jiraTicket.createJiraTicket();
+            getLogger().info("Successfully create jira ticket: " + ticketId);
+        } catch (Exception e) {
+            getLogger().error("Unable to Create Ticket with given configurations");
+            getLogger().error("project Name: "+ jiraTicket.getProjectKey()+
+                            "\nJira URL:"+jiraTicket.getJiraUrl()+
+                            "\nJira User"+jiraTicket.getJiraUser()+
+                            "\nPriority"+jiraTicket.getPriorityName()+
+                            "\nIssue Type"+jiraTicket.getIssueTypeName()+
+                            "\nSummary:"+jiraTicket.getSummary()+
+                            "\nDescription:"+jiraTicket.getDescription()
+            );
+            e.printStackTrace();
+            throw e;
+        }
+        @SuppressWarnings({"unchecked", "rawtypes"})
+        Map<String, String> psMap = (Map) ps;
 
-                updatedFlowFile = session.putAllAttributes(flowFile,psMap);
-            try {
-                session.transfer(updatedFlowFile, REL_SUCCESS);
-            } catch (Exception e) {
-                updatedFlowFile = session.putAttribute(updatedFlowFile,"NotificationError",e.getLocalizedMessage());
+        updatedFlowFile = session.putAllAttributes(flowFile, psMap);
+        try {
+            session.transfer(updatedFlowFile, REL_SUCCESS);
+        } catch (Exception e) {
+            updatedFlowFile = session.putAttribute(updatedFlowFile, "NotificationError", e.getLocalizedMessage());
             session.transfer(updatedFlowFile, REL_FAIL);
         }
     }

@@ -48,7 +48,7 @@ public class JiraCredentialService extends AbstractControllerService implements 
     public static final PropertyDescriptor PROP_JIRA_PROJECT = new PropertyDescriptor
             .Builder().name("jiraProject")
             .displayName("Jira Project")
-            .description("Project for Jira to post event")
+            .description("Jira Project to post event")
             .required(true)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .build();
@@ -63,8 +63,8 @@ public class JiraCredentialService extends AbstractControllerService implements 
 
     public static final PropertyDescriptor PROP_JIRA_PASSWORD = new PropertyDescriptor
             .Builder().name("jiraPassword")
-            .displayName("Jira User Password")
-            .description("password for Jira to post event")
+            .displayName("Jira User Password / API Token")
+            .description("password /  API token for Jira to post event")
             .required(true)
             .addValidator(StandardValidators.NON_EMPTY_VALIDATOR)
             .sensitive(true)

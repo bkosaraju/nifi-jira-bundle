@@ -3,6 +3,7 @@ package io.github.bkosaraju.processor.jiranotification;
 import com.atlassian.jira.rest.client.api.IssueRestClient;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.MetadataRestClient;
+import com.atlassian.jira.rest.client.api.ProjectRestClient;
 import com.atlassian.jira.rest.client.api.domain.*;
 import com.atlassian.jira.rest.client.api.domain.input.IssueInputBuilder;
 import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientFactory;
@@ -10,6 +11,7 @@ import com.atlassian.jira.rest.client.internal.async.AsynchronousJiraRestClientF
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 public class JiraService {
@@ -21,12 +23,14 @@ public class JiraService {
     public String jiraPassword;
     public String jiraUrl;
     public String projectKey;
+    public String projectName;
     public List<String> tags;
     public String Summary;
     public String Description;
 
     private Long priorityId;
     private Long issueTypeId;
+    private Object IOException;
 
     public String getSummary() {
         return Summary;
@@ -42,6 +46,15 @@ public class JiraService {
 
     public void setDescription(String description) {
         Description = description;
+    }
+
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
 
@@ -113,7 +126,6 @@ public class JiraService {
 
 
     public Long getPriority() {
-        //Long priorityId = null;
         this.setPriorityName((this.priorityName == null) ? this.priorityName = "Low" : this.priorityName);
         try {
             for (Priority priority : getJiraMetadataClient().getPriorities().get()) {
@@ -140,29 +152,35 @@ public class JiraService {
         }
         return issueTypeId;
     }
-    public String createJiraTicket() {
+
+    public String createJiraTicket()  {
         String ticketId = null;
         try {
             URI jiraURI = URI.create(this.getJiraUrl());
             AsynchronousJiraRestClientFactory jiraRestClientFactory = new AsynchronousJiraRestClientFactory();
             JiraRestClient jiraRestClient = jiraRestClientFactory.createWithBasicHttpAuthentication(jiraURI, this.getJiraUser(), this.getJiraPassword());
             this.setJiraMetadataClient(jiraRestClient.getMetadataClient());
+            ProjectRestClient projectClient = jiraRestClient.getProjectClient();
+            for (BasicProject projects : projectClient.getAllProjects().get()) {
+                if (projects.getName().equalsIgnoreCase(this.getProjectName())) {
+                    this.setProjectKey(projects.getKey());
+                }
+            }
             IssueRestClient issueClient = jiraRestClient.getIssueClient();
 
             IssueInputBuilder issueInputBuilder= new IssueInputBuilder()
-                    .setProjectKey(this.getProjectKey())
-                    .setIssueTypeId(this.getIssueType())
-                    .setPriorityId(this.getPriority())
-                    .setSummary(this.getSummary())
-                    .setDescription(this.getDescription());
+                    .setProjectKey(projectKey)
+                    .setIssueTypeId(getIssueType())
+                    .setPriorityId(getPriority())
+                    .setSummary(getSummary())
+                    .setDescription(getDescription());
 
-            if (this.getTags().toArray().length >0 ) {
+            if (getTags() != null && getTags().toArray().length >0 ) {
             issueInputBuilder.setFieldValue("labels", tags);
             }
             ticketId = issueClient.createIssue(issueInputBuilder.build()).claim().getKey();
             jiraRestClient.close();
-        } catch (IOException e) {
-            System.out.println(this.getProjectKey()+this.getIssueType()+this.getIssueTypeName()+this.getPriority()+this.getPriorityName()+this.getSummary());
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return ticketId;

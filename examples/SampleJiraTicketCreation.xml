@@ -127,18 +127,18 @@
             <properties>
                 <entry>
                     <key>jiraURL</key>
-                    <value>https://bkosaraju.atlassian.net</value>
+                    <value>xxxxxxxxxxxxx</value>
                 </entry>
                 <entry>
                     <key>jiraUser</key>
-                    <value>bhargav.kosaraju@hotmail.com</value>
+                    <value>xxxxxxxxx</value>
                 </entry>
                 <entry>
                     <key>jiraPassword</key>
                 </entry>
                 <entry>
                     <key>jiraProject</key>
-                    <value>IT Project</value>
+                    <value>xxxxxxxxxx</value>
                 </entry>
             </properties>
             <state>ENABLED</state>

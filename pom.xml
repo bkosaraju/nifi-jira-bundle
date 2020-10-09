@@ -24,7 +24,7 @@
 
     <groupId>io.github.bkosaraju</groupId>
     <artifactId>nifi-jira-bundle</artifactId>
-    <version>1.0</version>
+    <version>1.12.1_1.00</version>
     <packaging>pom</packaging>
 
     <modules>

@@ -93,7 +93,7 @@
             <bundle>
                 <artifact>nifi-jira-nar</artifact>
                 <group>io.github.bkosaraju</group>
-                <version>1.0</version>
+                <version>1.12.1_1.00</version>
             </bundle>
             <comments></comments>
             <descriptors>
@@ -154,7 +154,7 @@
             <bundle>
                 <artifact>nifi-jira-nar</artifact>
                 <group>io.github.bkosaraju</group>
-                <version>1.0</version>
+                <version>1.12.1_1.00</version>
             </bundle>
             <config>
                 <bulletinLevel>WARN</bulletinLevel>

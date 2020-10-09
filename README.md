@@ -2,7 +2,8 @@
 
 NiFi Custom Processor and Controller Service which can be Used to create Jira Tickets from NiFi.
 
-Credentials(User,Password,Project Name, URL) needs to be fed to Processor from controller service, which gives the flexibly that multiple processors can use the same credentials which gives one place change for all processors.
+Credentials(User,Password,Project Name, URL) needs to be fed to Processor from controller service, 
+this gives the flexibly for multiple processors can use the same credentials that means one place to change connection details for all processors.
 
 Controller Service
 ------------------
@@ -33,6 +34,9 @@ Sample code
 
 Where can I get the latest release?
 -----------------------------------
+
+Pre compiled binaries can be downloaded from [Maven Central](https://repo1.maven.org/maven2/io/github/bkosaraju/nifi-jira-nar/)
+
 You can download source from [SCM](https://github.com/bkosaraju/nifi-jira-bundle).
 
 ## Build Instructions 

@@ -15,32 +15,52 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>io.github.bkosaraju</groupId>
         <artifactId>nifi-jira-bundle</artifactId>
-        <version>1.0</version>
+        <version>1.12.1_1.00</version>
     </parent>
-
     <artifactId>nifi-jira-nar</artifactId>
-    <version>1.0</version>
+    <version>1.12.1_1.00</version>
     <packaging>nar</packaging>
-
     <properties>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <source.skip>true</source.skip>
     </properties>
+    <name>nifi-jira-bundle</name>
+    <description>
+        NiFi Custom Processor and Controller Service which can be Used to create Jira Tickets from NiFi.
 
+        Credentials(User,Password,Project Name, URL) needs to be fed to Processor from controller service,
+        this gives the flexibly for multiple processors can use the same credentials that means one place to change connection details for all processors.
+    </description>
+    <url>https://bkosaraju.github.io/nifi-jira-bundle</url>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>bkosaraju</id>
+            <name>Bhargav Kosaraju</name>
+        </developer>
+    </developers>
+    <scm>
+        <connection>scm:git:https://github.com/bkosaraju/nifi-jira-nar.git</connection>
+        <url>https://github.com/bkosaraju/nifi-jira-nar</url>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>io.github.bkosaraju</groupId>
             <artifactId>nifi-jira-processor</artifactId>
-            <version>1.0</version>
+            <version>1.12.1_1.00</version>
         </dependency>
         <dependency>
             <groupId>io.github.bkosaraju</groupId>
             <artifactId>nifi-jira-service</artifactId>
-            <version>1.0</version>
+            <version>1.12.1_1.00</version>
         </dependency>
         <dependency>
             <groupId>org.apache.nifi</groupId>
@@ -50,4 +70,39 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

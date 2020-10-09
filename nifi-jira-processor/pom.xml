@@ -19,12 +19,12 @@
     <parent>
         <groupId>io.github.bkosaraju</groupId>
         <artifactId>nifi-jira-bundle</artifactId>
-        <version>1.0</version>
+        <version>1.12.1_1.00</version>
     </parent>
 
     <artifactId>nifi-jira-processor</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.12.1_1.00</version>
 
     <dependencies>
         <dependency>
@@ -40,7 +40,7 @@
             <groupId>io.github.bkosaraju</groupId>
             <artifactId>nifi-jira-service</artifactId>
             <scope>provided</scope>
-            <version>1.0</version>
+            <version>1.12.1_1.00</version>
         </dependency>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
